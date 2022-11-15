@@ -1,0 +1,15 @@
+resource "aws_s3_bucket" "s3demobucket1978" {
+  for_each = {
+    dev = "s3-dev-bucket1978"
+    pro = "s3-pro-bucket1978"
+    qa  = "s3-qa-bucket1978"
+  }
+  bucket = "${each.key}-${each.value}"
+  acl    = "private"
+
+  tags = {
+    Name      = "${each.key}-${each.value}"
+    Eachvalue = each.value
+    Eachkey   = each.key
+  }
+}
